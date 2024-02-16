@@ -8,6 +8,7 @@ from .chain import (
     RegressorChain,
 )
 from .encoder import MultiClassEncoder
+from .peroutput import PerOutputClassifier
 
 __all__ = [
     "ClassifierChain",
@@ -15,4 +16,5 @@ __all__ = [
     "MultiClassEncoder",
     "ProbabilisticClassifierChain",
     "RegressorChain",
+    "PerOutputClassifier",
 ]
