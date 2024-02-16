@@ -3,9 +3,10 @@ from __future__ import annotations
 import functools
 
 from river import base
+from river.utils.math import minkowski_distance
 
 
-class PerOutputClassifier(base.Wrapper):
+class PerOutputClassifier(base.MultiLabelClassifier):
     """Placeholder class docstring
 
     Parameters
