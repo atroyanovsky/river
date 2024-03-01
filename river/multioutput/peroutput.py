@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 import functools
 
 from river import base
@@ -7,7 +8,11 @@ from river.utils.math import minkowski_distance
 
 
 class PerOutputClassifier(base.MultiLabelClassifier):
-    """Placeholder class docstring
+    """Multi-target classification.
+    
+    This class implements a classification strategy where a classifier is 
+    fitting multiple targets separately.
+    
 
     Parameters
     ----------
@@ -26,8 +31,9 @@ class PerOutputClassifier(base.MultiLabelClassifier):
 
     @classmethod
     def _unit_test_params(cls):
-        from river import neighbors
+        from river import linear_model, neighbors
 
+        yield {"model": linear_model.LogisticRegression()}  # binary classifier
         yield {
             "model": neighbors.KNNClassifier(
                 n_neighbors=1,
@@ -37,11 +43,18 @@ class PerOutputClassifier(base.MultiLabelClassifier):
             )
         }  # multi-class classifier
 
+    @property
+    def _multiclass(self):
+        return self.model._multiclass
+    
     def learn_one(self, x, y):
         pass
     
-    def predict_one(self, x, y):
-        pass
+    #def predict_one(self, x, y):
+    #    pass
 
     def predict_proba_one(self, x, **kwargs):
-        pass
+        x = copy.copy(x)
+        y_pred = {} # in case the model hasn't seen data yet 
+
+        return y_pred
